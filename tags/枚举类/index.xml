@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>枚举类 on 流雲居</title>
+    <link>/tags/%E6%9E%9A%E4%B8%BE%E7%B1%BB/</link>
+    <description>Recent content in 枚举类 on 流雲居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Tue, 28 Jan 2020 16:06:36 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/%E6%9E%9A%E4%B8%BE%E7%B1%BB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java 单例类和枚举类异同</title>
+      <link>/post/differ-of-singleton-and-enum-in-java/</link>
+      <pubDate>Tue, 28 Jan 2020 16:06:36 +0800</pubDate>
+      
+      <guid>/post/differ-of-singleton-and-enum-in-java/</guid>
+      <description>实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。 区别在于枚举类一般使</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on 流雲居</title>
+    <link>/tags/mysql/</link>
+    <description>Recent content in MySQL on 流雲居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Sun, 24 Nov 2019 00:41:11 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL 无法登陆</title>
+      <link>/post/mysql-cant-login/</link>
+      <pubDate>Sun, 24 Nov 2019 00:41:11 +0800</pubDate>
+      
+      <guid>/post/mysql-cant-login/</guid>
+      <description>由于 MySQL 5.7 之后默认开启 unix_socket 插件，只能使用 socket 方式连接，因此无法像以前版本一样使用密码登陆，安装时也不像以前那样有设置密码的步骤，也不会给临时的随机</description>
+    </item>
+    
+    <item>
+      <title>MySQL 5.7 ERROR 1055 解决办法</title>
+      <link>/post/mysql57-error1055/</link>
+      <pubDate>Thu, 13 Dec 2018 13:35:22 +0800</pubDate>
+      
+      <guid>/post/mysql57-error1055/</guid>
+      <description>在 5.7 以上版本的 MySQL 中使用 GROUP BY 语句的时候会报出 ERROR 1055，如下： 1 [Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column &amp;#39;information_schema.PROFILING.SEQ&amp;#39; which is not functionally dependent on columns in GROUP BY clause; 这是因为 5.7 以上的</description>
+    </item>
+    
+    <item>
+      <title>MySQL 5.7 修改密码</title>
+      <link>/post/mysql57-change-pass/</link>
+      <pubDate>Wed, 03 Oct 2018 19:56:59 +0800</pubDate>
+      
+      <guid>/post/mysql57-change-pass/</guid>
+      <description>MySQL 5.7 版本的 user 表里面已经没有 password 字段，用来验证密码的是 authentication_string 字段，所以修改密码的方法也略微不同。 命令如下： 1 UPDATE user SET authentication_string = password(&amp;#39;your_password&amp;#39;) WHERE User = &amp;#39;your_username&amp;#39;;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 配置远程访问</title>
+      <link>/post/mysql-remote-access/</link>
+      <pubDate>Mon, 20 Aug 2018 10:07:52 +0800</pubDate>
+      
+      <guid>/post/mysql-remote-access/</guid>
+      <description>为了方便管理服务器上的数据库，我们往往需要配置远程访问，步骤如下： 配置 MySQL 不同的 Linux 发行版和不同 MySQL 版本，MySQL 的配置文件的位置不同，可以到 /etc/mysql</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java 的值传递和引用传递 - 流雲居</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李屹" /><meta name="description" content="Java 中的参数传递其实都是值传递，也就是复制一个副本传进去使用，在方法内对这个副本进行修改不会影响原变量。 那么为什么传一个对象变量进去就可以改变" /><meta name="keywords" content="流雲居, IT, 运维, Linux, Debian, Ubuntu, Git, 后端, Java, Go, Golang, Go 语言, PHP, MySQL, MariaDB" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.71.0 with theme even" />
+
+
+<link rel="canonical" href="/post/java-pass-by-what/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java 的值传递和引用传递" />
+<meta property="og:description" content="Java 中的参数传递其实都是值传递，也就是复制一个副本传进去使用，在方法内对这个副本进行修改不会影响原变量。 那么为什么传一个对象变量进去就可以改变" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/java-pass-by-what/" />
+<meta property="article:published_time" content="2019-12-16T22:52:52+08:00" />
+<meta property="article:modified_time" content="2019-12-16T22:52:52+08:00" />
+<meta itemprop="name" content="Java 的值传递和引用传递">
+<meta itemprop="description" content="Java 中的参数传递其实都是值传递，也就是复制一个副本传进去使用，在方法内对这个副本进行修改不会影响原变量。 那么为什么传一个对象变量进去就可以改变">
+<meta itemprop="datePublished" content="2019-12-16T22:52:52&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-16T22:52:52&#43;08:00" />
+<meta itemprop="wordCount" content="710">
+
+
+
+<meta itemprop="keywords" content="Java,后端," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java 的值传递和引用传递"/>
+<meta name="twitter:description" content="Java 中的参数传递其实都是值传递，也就是复制一个副本传进去使用，在方法内对这个副本进行修改不会影响原变量。 那么为什么传一个对象变量进去就可以改变"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">流雲居</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">流雲居</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java 的值传递和引用传递</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-16 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+          <span class="more-meta"> 约 710 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Java 中的参数传递其实都是值传递，也就是复制一个副本传进去使用，在方法内对这个副本进行修改不会影响原变量。</p>
+<p>那么为什么传一个对象变量进去就可以改变原对象呢？</p>
+<p>先看看基本数据和引用数据的区别：</p>
+<ul>
+<li>
+<p>基本数据</p>
+<p>变量名 ——&gt; 数值（整数、浮点数、字符*、布尔）</p>
+</li>
+<li>
+<p>引用数据</p>
+<p>变量名 ——&gt; 地址值 ——&gt; 对象（类、数组、接口、字符串*）</p>
+<blockquote>
+<p><em>*字符串和字符不一样，它是对象类型，但设计为不可变对象，操作字符串的时候都是另外生成一个新的字符串对象赋值给原变量。</em></p>
+</blockquote>
+</li>
+</ul>
+<p>基本数据类型变量本身存的是一个数值，引用数据变量本身存的是一个地址值，这个地址值就是对象在内存中的位置，通过这个地址值找到对象，然后使用对象。</p>
+<p>在传参数的时候，无论基本变量还是引用变量，都是把本身复制一份副本传进去，只不过引用变量复制的仅仅是地址值，它引用的对象并不会复制。由于地址值是一样的，那么变量的原本和副本指向的自然还是那同一个对象，所以对它们其中任何一个进行操作，都操作的是同一个对象。</p>
+<p>比如这种情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Apple</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Apple</span><span class="o">(</span><span class="s">&#34;iPhone X&#34;</span><span class="o">,</span> <span class="n">8888</span><span class="o">);</span>
+<span class="n">showPrice</span><span class="o">(</span><span class="n">a</span><span class="o">);</span> <span class="c1">// 结果为 7777
+</span><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">price</span><span class="o">);</span> <span class="c1">// 结果也是 7777
+</span><span class="c1"></span><span class="n">showPrice</span><span class="o">(</span><span class="n">Apple</span> <span class="n">apple</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">apple</span><span class="o">.</span><span class="na">prince</span> <span class="o">=</span> <span class="n">7777</span><span class="o">;</span> <span class="c1">// apple 和 a 地址值一样，操作的都是同一个 iPhone X
+</span><span class="c1"></span>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">apple</span><span class="o">.</span><span class="na">price</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果在方法内给引用变量的副本赋值一个新的对象，也就改变了副本的地址值，但原变量的地址值是不会改变的，所以这个时候它们操作的就是不同的对象了，因此就互不影响了。</p>
+<p>比如这种情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Apple</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Apple</span><span class="o">(</span><span class="s">&#34;iPhone X&#34;</span><span class="o">,</span> <span class="n">8888</span><span class="o">);</span>
+<span class="n">showPrice</span><span class="o">(</span><span class="n">a</span><span class="o">);</span> <span class="c1">// 结果为 6666
+</span><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">price</span><span class="o">);</span> <span class="c1">// a 的地址值不会改变，依然指向 8888 的 iPhone X，结果为 8888
+</span><span class="c1"></span><span class="n">showPrice</span><span class="o">(</span><span class="n">Apple</span> <span class="n">apple</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">apple</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Apple</span><span class="o">(</span><span class="s">&#34;iPhone X&#34;</span><span class="err">，</span><span class="n">6666</span><span class="o">);</span> <span class="c1">// apple 的地址值发生改变，变成 6666 的 iPhone X 的地址。
+</span><span class="c1"></span>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">apple</span><span class="o">.</span><span class="na">price</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>由于字符串是一种不可变对象，每次操作字符串变量都是生成一个新字符串对象赋值给变量，所以传递字符串参数时都是属于这种情况。</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">李屹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-12-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          <a href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/differ-of-singleton-and-enum-in-java/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java 单例类和枚举类异同</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/mysql-cant-login/">
+            <span class="next-text nav-default">MySQL 无法登陆</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/hiliyi" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

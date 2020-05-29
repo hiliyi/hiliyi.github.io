@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Manjaro on 流雲居</title>
+    <link>/tags/manjaro/</link>
+    <description>Recent content in Manjaro on 流雲居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Mon, 28 Oct 2019 09:37:29 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/manjaro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Manjaro 如何在命令行下关闭屏幕显示	</title>
+      <link>/post/manjaro-turnoff-display-in-cli/</link>
+      <pubDate>Mon, 28 Oct 2019 09:37:29 +0800</pubDate>
+      
+      <guid>/post/manjaro-turnoff-display-in-cli/</guid>
+      <description>最近在一台旧笔记本电脑上面装了 Manjaro 系统当作服务器使用，不过有个问题就是笔记本电脑的屏幕不像台式显示屏一样有电源按钮，所以关闭不是那么方便，一直</description>
+    </item>
+    
+  </channel>
+</rss>

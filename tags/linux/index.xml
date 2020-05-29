@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 流雲居</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on 流雲居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Thu, 16 May 2019 19:44:09 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux 修改键盘映射</title>
+      <link>/post/linux-modify-keyboard-mapping/</link>
+      <pubDate>Thu, 16 May 2019 19:44:09 +0800</pubDate>
+      
+      <guid>/post/linux-modify-keyboard-mapping/</guid>
+      <description>查看按键键值和映射名 比如查看 Right 键的键值和映射名： 1 xmodmap -pke | grep right -i 结果如下： 1 2 3 4 5 6 7 8 9 keycode 19 = 0 parenright 0 parenright keycode 35 = bracketright braceright bracketright braceright keycode 85 = KP_Right KP_6 KP_Right KP_6 keycode 114 = Right</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MariaDB on 流雲居</title>
+    <link>/tags/mariadb/</link>
+    <description>Recent content in MariaDB on 流雲居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Tue, 03 Mar 2020 17:16:25 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/mariadb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MariaDB 10.4 修改密码</title>
+      <link>/post/mariadb-change-pass/</link>
+      <pubDate>Tue, 03 Mar 2020 17:16:25 +0800</pubDate>
+      
+      <guid>/post/mariadb-change-pass/</guid>
+      <description>今天新安装了 MariaDB，版本是 10.4.12，登陆之后使用 update 语句修改密码的时候居然提示： ERROR 1348 (HY000): Column &amp;lsquo;Password&amp;rsquo; is not updatable 原来 MariaDB 10.4 禁止使用 update 语句修改 mysql 库的</description>
+    </item>
+    
+  </channel>
+</rss>

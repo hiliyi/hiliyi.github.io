@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java 单例类和枚举类异同 - 流雲居</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李屹" /><meta name="description" content="实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。 区别在于枚举类一般使" /><meta name="keywords" content="流雲居, IT, 运维, Linux, Debian, Ubuntu, Git, 后端, Java, Go, Golang, Go 语言, PHP, MySQL, MariaDB" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.71.0 with theme even" />
+
+
+<link rel="canonical" href="/post/differ-of-singleton-and-enum-in-java/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java 单例类和枚举类异同" />
+<meta property="og:description" content="实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。 区别在于枚举类一般使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/differ-of-singleton-and-enum-in-java/" />
+<meta property="article:published_time" content="2020-01-28T16:06:36+08:00" />
+<meta property="article:modified_time" content="2020-01-28T16:06:36+08:00" />
+<meta itemprop="name" content="Java 单例类和枚举类异同">
+<meta itemprop="description" content="实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。 区别在于枚举类一般使">
+<meta itemprop="datePublished" content="2020-01-28T16:06:36&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-28T16:06:36&#43;08:00" />
+<meta itemprop="wordCount" content="607">
+
+
+
+<meta itemprop="keywords" content="Java,后端,单例模式,枚举类," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java 单例类和枚举类异同"/>
+<meta name="twitter:description" content="实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。 区别在于枚举类一般使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">流雲居</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">流雲居</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java 单例类和枚举类异同</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-28 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+          <span class="more-meta"> 约 607 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。</p>
+<p>区别在于枚举类一般使用多个实例，属于多例类，而单例只用一个，当然枚举类也可以只用一个实例，这本身也是一种实现单例模式的方法。另外单例类的静态实例属性一般是私有的，要用对应的 get 方法获取，而枚举类的属性则是公开的，可以直接 className.fieldName 使用。</p>
+<p>本质上来说，enum 语法是一种语法糖，Java 编译器在编译时会把它转化成一个完整的类。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">enum</span> <span class="n">Color</span> <span class="o">{</span>
+    <span class="n">RED</span><span class="o">,</span> <span class="n">YELLOW</span><span class="o">,</span> <span class="n">GREEN</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>会转化成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Color</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Color</span> <span class="n">RED</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Color</span> <span class="n">YELLOW</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Color</span> <span class="n">GREEN</span><span class="o">;</span>
+
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="n">RED</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Color</span><span class="o">(</span><span class="s">&#34;RED&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+        <span class="n">YELLOW</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Color</span><span class="o">(</span><span class="s">&#34;YELLOW&#34;</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
+        <span class="n">GREEN</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Color</span><span class="o">(</span><span class="s">&#34;GREEN&#34;</span><span class="o">,</span> <span class="n">2</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nf">Color</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>因此，我们是可以把枚举类用作单例类或者多例类使用的，只要在定义枚举的时候在枚举里面加上我们需要的其他字段和方法就可以了，也可以重写枚举本身的一些方法，包括构造方法都可以重写。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Something</span> <span class="o">{</span>
+
+    <span class="n">INSTANCE</span><span class="o">(</span><span class="s">&#34;This is a sameple!&#34;</span><span class="o">);</span> <span class="c1">// 枚举元素可以传入自定义字段
+</span><span class="c1"></span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">someValue</span><span class="o">;</span> <span class="c1">// 自定义字段
+</span><span class="c1"></span>
+    <span class="kd">private</span> <span class="nf">Something</span><span class="o">(</span><span class="n">String</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">someValue</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span> <span class="c1">// 重写构造方法
+</span><span class="c1"></span>    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span> <span class="c1">// 由于 INSTANCE 不是私有的，其实不需要用这个方法来获取实例。
+</span><span class="c1"></span>    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSomeValue</span><span class="o">(</span><span class="n">String</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">someValue</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSomeValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">someValue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">doSomeOtherthing</span><span class="err">（）</span><span class="o">{</span>
+        <span class="n">doing</span><span class="err">；</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用枚举来实现单例或者多例有一个好处是枚举自身有保证线程安全的机制，因此不用自己考虑线程安全问题，这也是目前比较推荐的单例实现方法。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">李屹</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-01-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          <a href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+          <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a>
+          <a href="/tags/%E6%9E%9A%E4%B8%BE%E7%B1%BB/">枚举类</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/mariadb-change-pass/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MariaDB 10.4 修改密码</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/java-pass-by-what/">
+            <span class="next-text nav-default">Java 的值传递和引用传递</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/hiliyi" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

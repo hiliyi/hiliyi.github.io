@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>流雲居</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content="个人博客" /><meta name="keywords" content="流雲居, IT, 运维, Linux, Debian, Ubuntu, Git, 后端, Java, Go, Golang, Go 语言, PHP, MySQL, MariaDB" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.71.0 with theme even" />
+
+
+<link rel="canonical" href="/" />
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="流雲居" />
+  <link href="/index.xml" rel="feed" type="application/rss+xml" title="流雲居" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="流雲居" />
+<meta property="og:description" content="个人博客" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/" />
+<meta property="og:updated_time" content="2019-06-11T12:00:09+08:00" />
+<meta itemprop="name" content="流雲居">
+<meta itemprop="description" content="个人博客"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="流雲居"/>
+<meta name="twitter:description" content="个人博客"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">流雲居</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">流雲居</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mariadb-change-pass/">MariaDB 10.4 修改密码</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-03 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 310 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      今天新安装了 MariaDB，版本是 10.4.12，登陆之后使用 update 语句修改密码的时候居然提示： ERROR 1348 (HY000): Column &lsquo;Password&rsquo; is not updatable 原来 MariaDB 10.4 禁止使用 update 语句修改 mysql 库的
+    </div>
+    <div class="read-more">
+      <a href="/post/mariadb-change-pass/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/differ-of-singleton-and-enum-in-java/">Java 单例类和枚举类异同</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-01-28 </span>
+      <div class="post-category">
+          <a href="/categories/java/"> Java </a>
+          </div>
+        <span class="more-meta"> 约 607 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      实际上 Java 中的单例类和枚举类原理基本上是一样的，都是构造方法私有，类自带静态的实例属性，由类负责创建实例然后向外提供实例。 区别在于枚举类一般使
+    </div>
+    <div class="read-more">
+      <a href="/post/differ-of-singleton-and-enum-in-java/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-pass-by-what/">Java 的值传递和引用传递</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-12-16 </span>
+      <div class="post-category">
+          <a href="/categories/java/"> Java </a>
+          </div>
+        <span class="more-meta"> 约 710 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Java 中的参数传递其实都是值传递，也就是复制一个副本传进去使用，在方法内对这个副本进行修改不会影响原变量。 那么为什么传一个对象变量进去就可以改变
+    </div>
+    <div class="read-more">
+      <a href="/post/java-pass-by-what/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mysql-cant-login/">MySQL 无法登陆</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-11-24 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 233 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      由于 MySQL 5.7 之后默认开启 unix_socket 插件，只能使用 socket 方式连接，因此无法像以前版本一样使用密码登陆，安装时也不像以前那样有设置密码的步骤，也不会给临时的随机
+    </div>
+    <div class="read-more">
+      <a href="/post/mysql-cant-login/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/manjaro-turnoff-display-in-cli/">Manjaro 如何在命令行下关闭屏幕显示	</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-10-28 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 272 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      最近在一台旧笔记本电脑上面装了 Manjaro 系统当作服务器使用，不过有个问题就是笔记本电脑的屏幕不像台式显示屏一样有电源按钮，所以关闭不是那么方便，一直
+    </div>
+    <div class="read-more">
+      <a href="/post/manjaro-turnoff-display-in-cli/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ubuntu-set-swap/">Ubuntu 18.04 设置虚拟内存</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-09-03 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 233 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      由于我这虚拟主机创建的时候没有分配虚拟内存空间，加上本身物理内存也是比较小的，所以只好自己手动设置一下虚拟内存了。 创建虚拟映象文件： 1 sudo dd if=/dev/zero
+    </div>
+    <div class="read-more">
+      <a href="/post/ubuntu-set-swap/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ubuntu-execute-command-when-starting/">Ubuntu 18.04 Server 开机启动指定命令</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-07-19 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 343 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      由于 Ubuntu 18.04 Server 的 /etc 目录下面默认没有 rc.local 文件了，所以先要自己新建一个： 1 sudo touch /etc/rc.local 编辑 rc.local 文件，输入如下内容： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #!/bin/sh -e # # rc.local # # This
+    </div>
+    <div class="read-more">
+      <a href="/post/ubuntu-execute-command-when-starting/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-modify-keyboard-mapping/">Linux 修改键盘映射</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-05-16 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 179 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      查看按键键值和映射名 比如查看 Right 键的键值和映射名： 1 xmodmap -pke | grep right -i 结果如下： 1 2 3 4 5 6 7 8 9 keycode 19 = 0 parenright 0 parenright keycode 35 = bracketright braceright bracketright braceright keycode 85 = KP_Right KP_6 KP_Right KP_6 keycode 114 = Right
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-modify-keyboard-mapping/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ubuntu-set-static-ip/">Ubuntu 18.04 Server 配置静态 IP</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-01 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 254 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      在 Ubuntu 18.04 Server 版中，启用了新的网络管理工具 netplan，因此配置网络参数的方法和之前版本有所区别。 配置文件在 /etc/netplan/ 目录下，是一个后缀名为 yaml 的文件，我
+    </div>
+    <div class="read-more">
+      <a href="/post/ubuntu-set-static-ip/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/git-command-table/">GIT 指令速查表及版本控制最佳实践</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-01-30 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+          </div>
+        <span class="more-meta"> 约 14 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      GIT 指令速查表 版本控制最佳实践
+    </div>
+    <div class="read-more">
+      <a href="/post/git-command-table/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    
+    <a class="next" href="/page/2/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/hiliyi" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on 流雲居</title>
+    <link>/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on 流雲居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn</language>
+    <lastBuildDate>Tue, 03 Sep 2019 21:51:36 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu 18.04 设置虚拟内存</title>
+      <link>/post/ubuntu-set-swap/</link>
+      <pubDate>Tue, 03 Sep 2019 21:51:36 +0800</pubDate>
+      
+      <guid>/post/ubuntu-set-swap/</guid>
+      <description>由于我这虚拟主机创建的时候没有分配虚拟内存空间，加上本身物理内存也是比较小的，所以只好自己手动设置一下虚拟内存了。 创建虚拟映象文件： 1 sudo dd if=/dev/zero</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 18.04 Server 开机启动指定命令</title>
+      <link>/post/ubuntu-execute-command-when-starting/</link>
+      <pubDate>Fri, 19 Jul 2019 16:20:58 +0800</pubDate>
+      
+      <guid>/post/ubuntu-execute-command-when-starting/</guid>
+      <description>由于 Ubuntu 18.04 Server 的 /etc 目录下面默认没有 rc.local 文件了，所以先要自己新建一个： 1 sudo touch /etc/rc.local 编辑 rc.local 文件，输入如下内容： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 #!/bin/sh -e # # rc.local # # This</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 18.04 Server 配置静态 IP</title>
+      <link>/post/ubuntu-set-static-ip/</link>
+      <pubDate>Fri, 01 Mar 2019 13:59:20 +0800</pubDate>
+      
+      <guid>/post/ubuntu-set-static-ip/</guid>
+      <description>在 Ubuntu 18.04 Server 版中，启用了新的网络管理工具 netplan，因此配置网络参数的方法和之前版本有所区别。 配置文件在 /etc/netplan/ 目录下，是一个后缀名为 yaml 的文件，我</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 添加新用户并开启 sudo 权限</title>
+      <link>/post/ubuntu-add-new-user/</link>
+      <pubDate>Wed, 07 Nov 2018 14:58:21 +0800</pubDate>
+      
+      <guid>/post/ubuntu-add-new-user/</guid>
+      <description>添加用户添加用户 Linux 里面添加用户主要使用 useradd 命令，但是这个命令的功能比较弱，还需要使用一系列其他命令才能完成用户配置。在 Ubuntu 里面有一个更便捷的命令</description>
+    </item>
+    
+  </channel>
+</rss>
